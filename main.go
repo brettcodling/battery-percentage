@@ -116,8 +116,10 @@ func setPercentage() {
 	rawPercentage, err := exec.Command("bash", "-c", cmd).Output()
 	if err != nil {
 		log.Println(err)
+	}
+	if string(rawPercentage) == "" {
 		systray.SetTitle("")
-		systray.SetIcon([]byte("test"))
+		systray.SetIcon([]byte("..."))
 		return
 	}
 	percentage := strings.TrimSuffix(string(rawPercentage), "\n")
